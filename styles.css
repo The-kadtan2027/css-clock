@@ -44,14 +44,6 @@ div {
   margin: 100px auto;
 }
 
-@media screen and (max-width: 550px) {
-  .clock {
-    width: 20rem;
-    height: 20rem;
-    margin-left: 50px;
-  }
-}
-
 .clock-face {
   position: relative;
   width: 100%;
@@ -161,7 +153,7 @@ footer {
   position: absolute;
   left: 50%;
   right: 0;
-  top: 0;
+
   bottom: 0;
 }
 /* button styling */
@@ -216,4 +208,28 @@ input:checked + .slider:before {
 
 .slider.round:before {
   border-radius: 50%;
+}
+
+@media screen and (max-width: 610px) {
+  .clock {
+    width: 20rem;
+    height: 20rem;
+    margin-left: 50px;
+  }
+  .slider {
+    width: 50px;
+    height: 25px;
+  }
+  .slider:before {
+    width: 20px;
+    height: 20px;
+    bottom: 2px;
+  }
+}
+@media screen and (max-width: 410px) {
+  .clock {
+    width: 15rem;
+    height: 15rem;
+  }
+  
 }
