@@ -44,6 +44,14 @@ div {
   margin: 100px auto;
 }
 
+@media screen and (max-width: 550px) {
+  .clock {
+    width: 20rem;
+    height: 20rem;
+    margin-left: 50px;
+  }
+}
+
 .clock-face {
   position: relative;
   width: 100%;
