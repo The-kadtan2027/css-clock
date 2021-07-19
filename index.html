@@ -1,65 +1,84 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles.css" />
     <title>JS and css Clock</title>
-</head>
+  </head>
 
-<body>
+  <body>
     <div class="clock">
-        <div class="clock-face">
-            <div class="hand hour-hand"></div>
-            <div class="hand min-hand"></div>
-            <div class="hand second-hand"></div>
-        </div>
+      <div class="clock-face">
+        <div class="marking marking-one"></div>
+        <div class="marking marking-two"></div>
+        <div class="marking marking-three"></div>
+        <div class="marking marking-four"></div>
+        <div class="inner-circle"></div>
+        <div class="inner-dot"></div>
+
+        <div class="hand hour-hand"></div>
+        <div class="hand min-hand"></div>
+        <div class="hand second-hand"></div>
+      </div>
     </div>
 
+    <label class="switch" for="checkbox">
+      <input type="checkbox" id="checkbox" />
+      <div class="slider round"></div>
+    </label>
+    <footer>
+      <p>Made With <span>💕</span> from Gaju</p>
+    </footer>
 
     <!-- JavaScript -->
     <script>
-        const secondHand = document.querySelector('.second-hand');
-        const minutHand = document.querySelector('.min-hand');
-        const hourHand = document.querySelector('.hour-hand');
+      const secondHand = document.querySelector(".second-hand");
+      const minutHand = document.querySelector(".min-hand");
+      const hourHand = document.querySelector(".hour-hand");
 
-        function setDate() {
-            const now = new Date();
-            const second = now.getSeconds();
-            const secondsInDeg = ((second / 60) * 360) + 90;
-            secondHand.style.transform = `rotate(${secondsInDeg}deg)`;
+      function setDate() {
+        const now = new Date();
+        const second = now.getSeconds();
+        const secondsInDeg = (second / 60) * 360 + 90;
+        secondHand.style.transform = `rotate(${secondsInDeg}deg)`;
 
+        const min = now.getMinutes();
+        const minInDeg = (min / 60) * 360 + 90;
+        minutHand.style.transform = `rotate(${minInDeg}deg)`;
 
+        // let's see how can we convert minuts in hours and show them as deg for hour hand.
+        //  let's say hour hand at 10 so 10 *60min = 600.. now we need to devide 600 by 12.. = 50
+        // 50 / 60
 
+        const hour = now.getHours();
+        // const hourInDeg = ((hour / 12) * 360) + ((min / 60) * 360) - 60 ;
 
-            const min = now.getMinutes();
-            const minInDeg = ((min / 60) * 360) + 90;
-            minutHand.style.transform = `rotate(${minInDeg}deg)`;
+        const hourInDeg = (hour * 360) / 12 + (min * 360) / 60 / 12 + 90; //it just adds minuts converted in degrees
+        // in to hours converted in degrees
 
-            // let's see how can we convert minuts in hours and show them as deg for hour hand.
-            //  let's say hour hand at 10 so 10 *60min = 600.. now we need to devide 600 by 12.. = 50 
-            // 50 / 60
+        hourHand.style.transform = `rotate(${hourInDeg}deg)`;
+      }
+      setInterval(setDate, 1000);
 
+      const togleSwitch = document.querySelector(
+        '.switch input[type="checkbox"]'
+      );
+      // const primaryTheme = window
+      //   .getComputedStyle(document.body)
+      //   .getPropertyValue("--primary-theme");
 
-
-            const hour = now.getHours();
-            // const hourInDeg = ((hour / 12) * 360) + ((min / 60) * 360) - 60 ;
-
-            const hourInDeg = hour * 360 / 12 + ((min * 360 / 60) / 12) + 90; //it just adds minuts converted in degrees 
-            // in to hours converted in degrees
-
-
-            hourHand.style.transform = `rotate(${hourInDeg}deg)`;
-
-            console.log(hourInDeg);
-
+      function switchToggle(e) {
+        if (e.target.checked) {
+          document.documentElement.setAttribute("data-theme", "light");
+        } else {
+          document.documentElement.setAttribute("data-theme", "dark");
         }
+      }
 
-        setInterval(setDate, 1000);
+      togleSwitch.addEventListener("change", switchToggle, false);
     </script>
-</body>
-
+  </body>
 </html>
